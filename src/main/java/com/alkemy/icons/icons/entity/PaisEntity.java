@@ -1,11 +1,16 @@
 package com.alkemy.icons.icons.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table (name="pais")
+@Table(name = "pais")
+@Getter
+@Setter
 public class PaisEntity {
 
     @Id
@@ -13,7 +18,7 @@ public class PaisEntity {
     private Long id;
 
     private String denominacion;
-    @Column (name = "cant_habitantes")
+    @Column(name = "cant_habitantes")
 
     private Long cantidadHabitantes;
 
@@ -34,7 +39,7 @@ public class PaisEntity {
             })
     @JoinTable(
             name = "icon_pais",
-            joinColumns = @JoinColumn(name= "pais_id"),
+            joinColumns = @JoinColumn(name = "pais_id"),
             inverseJoinColumns = @JoinColumn(name = "icon_id"))
     private Set<IconEntity> icons = new HashSet<>();
 }

@@ -24,7 +24,7 @@ public class PaisEntity {
 
     private Long superficie;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.MERGE})
     @JoinColumn(name = "continente_id", insertable = false, updatable = false)
     private ContinenteEntity continente;
 
@@ -42,4 +42,12 @@ public class PaisEntity {
             joinColumns = @JoinColumn(name = "pais_id"),
             inverseJoinColumns = @JoinColumn(name = "icon_id"))
     private Set<IconEntity> icons = new HashSet<>();
+
+    //TODO: FALTA IMPLEMENTAR
+    public void addIcon(IconEntity icon){
+        this.icons.add(icon);
+    }
+    public void removeIcon(IconEntity icon){
+        this.icons.remove(icon);
+    }
 }

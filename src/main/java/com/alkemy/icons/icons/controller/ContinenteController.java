@@ -2,7 +2,6 @@ package com.alkemy.icons.icons.controller;
 
 import com.alkemy.icons.icons.dto.ContinenteDto;
 import com.alkemy.icons.icons.service.ContinenteService;
-import com.alkemy.icons.icons.service.impl.ContinenteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +28,7 @@ public class ContinenteController {
         ContinenteDto continenteGuardado = continenteService.save(continente);
         return ResponseEntity.status(HttpStatus.CREATED).body(continenteGuardado);
     }
+
 
 
 }

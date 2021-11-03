@@ -3,10 +3,12 @@ package com.alkemy.icons.icons.service.impl;
 
 import com.alkemy.icons.icons.dto.IconBasicDto;
 import com.alkemy.icons.icons.dto.IconDto;
+import com.alkemy.icons.icons.dto.IconFiltersDto;
 import com.alkemy.icons.icons.entity.IconEntity;
 import com.alkemy.icons.icons.exception.ParamNotFound;
 import com.alkemy.icons.icons.mapper.IconMapper;
 import com.alkemy.icons.icons.repository.IconRepository;
+import com.alkemy.icons.icons.repository.specifications.IconSpecification;
 import com.alkemy.icons.icons.service.IconService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,14 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class IconImpl implements IconService {
+public class IconServiceImpl implements IconService {
 
     @Autowired
     IconMapper iconMapper;
     @Autowired
     private IconRepository iconRepository;
+    @Autowired
+    IconSpecification iconSpecification;
 
 
     public IconDto getDetailsById(Long id) {
@@ -42,7 +46,10 @@ public class IconImpl implements IconService {
 
     //TODO: Falta implementar
     public List<IconDto> getByFilters(String name, String date, Set<Long> cities, String order) {
-        return null;
+        IconFiltersDto filtersDto = new IconFiltersDto(name, date, cities, order);
+        List<IconEntity> entities = this.iconRepository.findAll(this.iconSpecification.getByFilters(filtersDto));
+        List<IconDto> dtos = this.iconMapper.iconEntitySet2DTOList(entities, true);
+        return dtos;
     }
 
     public IconDto save(IconDto iconDto) {
@@ -69,5 +76,9 @@ public class IconImpl implements IconService {
 
     public void delete(Long id) {
         this.iconRepository.deleteById(id);
+    }
+
+    public IconEntity getEntityById(Long id) {
+        return this.iconRepository.getById(id);
     }
 }

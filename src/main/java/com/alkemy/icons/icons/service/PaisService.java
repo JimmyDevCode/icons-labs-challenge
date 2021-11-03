@@ -12,8 +12,8 @@ public interface PaisService {
     PaisDto save(PaisDto dto);
 
     List<PaisDto> getAll();
-
-    void addIcono(Long id, Long idIcon);
+    
+    void addIcon(Long id, Long idIcon);
 
     void removeIcon(Long id, Long idIcon);
 }

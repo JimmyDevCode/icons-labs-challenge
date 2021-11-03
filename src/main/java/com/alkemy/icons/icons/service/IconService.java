@@ -2,6 +2,7 @@ package com.alkemy.icons.icons.service;
 
 import com.alkemy.icons.icons.dto.IconBasicDto;
 import com.alkemy.icons.icons.dto.IconDto;
+import com.alkemy.icons.icons.entity.IconEntity;
 
 import java.util.List;
 import java.util.Set;
@@ -19,5 +20,7 @@ public interface IconService {
     IconDto update(Long id, IconDto icon);
 
     void delete(Long id);
+
+    IconEntity getEntityById(Long id);
 
 }

@@ -43,7 +43,6 @@ public class PaisEntity {
             inverseJoinColumns = @JoinColumn(name = "icon_id"))
     private Set<IconEntity> icons = new HashSet<>();
 
-    //TODO: FALTA IMPLEMENTAR
     public void addIcon(IconEntity icon){
         this.icons.add(icon);
     }

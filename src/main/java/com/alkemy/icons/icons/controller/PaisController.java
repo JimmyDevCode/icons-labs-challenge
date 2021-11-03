@@ -29,4 +29,16 @@ public class PaisController {
         PaisDto paisGuardado = paisService.save(pais);
         return ResponseEntity.status(HttpStatus.CREATED).body(paisGuardado);
     }
+
+    @PostMapping("/{id}/icons/{idIcon}")
+    public ResponseEntity<Void> addIcon (@PathVariable Long id, @PathVariable Long idIcon){
+        this.paisService.addIcon(id, idIcon);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @DeleteMapping("/{id}/icons/{idIcon}")
+    public ResponseEntity<Void> removeIcon (@PathVariable Long id, @PathVariable Long idIcon){
+        this.paisService.removeIcon(id, idIcon);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }

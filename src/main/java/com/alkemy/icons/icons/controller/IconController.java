@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("icons")
@@ -31,6 +32,17 @@ public class IconController {
         return ResponseEntity.status(HttpStatus.OK).body(icon);
     }
 
+    @GetMapping
+    public ResponseEntity<List<IconDto>> getDetailsByFilters(
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false) String date,
+        @RequestParam(required = false) Set<Long> cities,
+        @RequestParam(required = false, defaultValue = "ASC") String order
+    ){
+        List<IconDto> icons = iconService.getByFilters(name, date, cities, order);
+        return ResponseEntity.status(HttpStatus.OK).body(icons);
+    }
+
     @PostMapping()
     public ResponseEntity<IconDto> save(@RequestBody IconDto icon){
         IconDto iconGuardado = iconService.save(icon);
@@ -47,4 +59,6 @@ public class IconController {
         this.iconService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+
 }

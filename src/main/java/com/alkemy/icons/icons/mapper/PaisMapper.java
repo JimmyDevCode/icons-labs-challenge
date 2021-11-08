@@ -1,9 +1,7 @@
 package com.alkemy.icons.icons.mapper;
 
-import com.alkemy.icons.icons.dto.ContinenteDto;
 import com.alkemy.icons.icons.dto.IconDto;
 import com.alkemy.icons.icons.dto.PaisDto;
-import com.alkemy.icons.icons.entity.ContinenteEntity;
 import com.alkemy.icons.icons.entity.IconEntity;
 import com.alkemy.icons.icons.entity.PaisEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +55,12 @@ public class PaisMapper {
             paisesDtos.add(this.paisEntity2DTO(entity, loadIcons));
         }
         return paisesDtos;
+    }
+
+    public void paisEntityRefreshValues(PaisEntity entity, PaisDto paisDto){
+        entity.setCantidadHabitantes(paisDto.getCantidadHabitantes());
+        entity.setContinenteId(paisDto.getContinenteId());
+        entity.setSuperficie(paisDto.getSuperficie());
+        entity.setDenominacion(paisDto.getDenominacion());
     }
 }

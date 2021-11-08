@@ -44,7 +44,6 @@ public class IconServiceImpl implements IconService {
         return  iconBasicDTOS;
     }
 
-    //TODO: Falta implementar
     public List<IconDto> getByFilters(String name, String date, Set<Long> cities, String order) {
         IconFiltersDto filtersDto = new IconFiltersDto(name, date, cities, order);
         List<IconEntity> entities = this.iconRepository.findAll(this.iconSpecification.getByFilters(filtersDto));
@@ -60,7 +59,7 @@ public class IconServiceImpl implements IconService {
         return result;
     }
 
-    //TODO: Falta implementar el método actualizar
+
     public IconDto update(Long id, IconDto iconDto) {
 
         Optional<IconEntity> entity = this.iconRepository.findById(id);

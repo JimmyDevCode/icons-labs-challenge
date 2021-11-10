@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository
 public interface PaisRepository extends JpaRepository <PaisEntity, Long> {
 
     List<PaisEntity> findAll(Specification<PaisEntity> spec);

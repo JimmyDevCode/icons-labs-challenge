@@ -26,10 +26,10 @@ public class UserDetailsCustomService implements UserDetailsService {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)  {
         UserEntity userEntity = this.userRepository.findByUsername(username);
         if (userEntity == null) {
-            throw new UsernameNotFoundException("Username or password not found");
+            throw new UsernameExistsException("Username or password not found");
         }
 
         return User.withUsername(userEntity.getUsername())
@@ -52,7 +52,6 @@ public class UserDetailsCustomService implements UserDetailsService {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(userDto.getUsername());
         userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        //userEntity.setPassword(userDto.getPassword());
         userEntity = this.userRepository.save(userEntity);
         if (userEntity != null) {
             this.emailService.sendWelcomeEmailTo(userEntity.getUsername());
